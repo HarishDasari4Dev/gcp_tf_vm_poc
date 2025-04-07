@@ -25,14 +25,14 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: terraform
+    
 
       - name: Terraform Plan
         run: |
           terraform plan -var="credentials_file=${{ github.workspace }}/gcp-creds.json"
-        working-directory: terraform
+      
 
       - name: Terraform Apply
         run: |
           terraform apply -auto-approve -var="credentials_file=${{ github.workspace }}/gcp-creds.json"
-        working-directory: terraform
+      
