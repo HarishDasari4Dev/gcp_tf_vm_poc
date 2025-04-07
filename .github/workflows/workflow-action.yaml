@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  terraform:
+  vm-poc:
     runs-on: ubuntu-latest
 
     steps:
