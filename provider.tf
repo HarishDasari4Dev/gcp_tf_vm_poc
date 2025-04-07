@@ -5,6 +5,11 @@ terraform {
       version = "~> 5.0"
     }
   }
+
+  backend "gcs" {
+    bucket = "harish-vm-poc-01"
+    prefix = "terraform/state"
+  }
 }
 
 provider "google" {
