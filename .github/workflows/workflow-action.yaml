@@ -20,19 +20,16 @@ jobs:
       - name: Create credentials file from secret
         run: |
            echo '${{ secrets.GCP_CREDENTIALS }}' > gcp-creds.json
-           export GOOGLE_APPLICATION_CREDENTIALS=${{ github.workspace }}/gcp-creds.json
         shell: bash
+
+      - name: Set GOOGLE_APPLICATION_CREDENTIALS
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=${{ github.workspace }}/gcp-creds.json" >> $GITHUB_ENV
 
       - name: Terraform Init
         run: terraform init
-    
 
       - name: Terraform Plan
-        run: |
-          terraform plan -var="credentials_file=${{ github.workspace }}/gcp-creds.json"
-      
+        run: terraform plan -var="credentials_file=${{ github.workspace }}/gcp-creds.json"
 
       - name: Terraform Apply
-        run: |
-          terraform apply -auto-approve -var="credentials_file=${{ github.workspace }}/gcp-creds.json"
-      
+        run: terraform apply -auto-approve -var="credentials_file=${{ github.workspace }}/gcp-creds.json"
