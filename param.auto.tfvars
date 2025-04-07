@@ -1,4 +1,9 @@
-project_id = "playground-s-11-9c9bf060"
-region     = "us-central1"
-zone       = "us-central1-a"
-vm_name    = "vm-poc"
+project_id      = "playground-s-11-9c9bf060"
+region          = "us-central1"
+zone            = "Any"
+vm_name         = "vm-poc_01"
+image           =  "projects/debian-cloud/global/images/debian-11-bullseye-v20240312"
+disk_size_gb    =   10
+machine_type    =   "e2-medium"
+network         =  "default"
+subnetwork      =  "default"
