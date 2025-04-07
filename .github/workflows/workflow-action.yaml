@@ -2,11 +2,10 @@ name: Terraform Deploy VM to GCP
 
 on:
   push:
-    branches: main
-  workflow_dispatch:
+    branches: main 
 
 jobs:
-  vm-poc:
+  terraform:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,20 +20,19 @@ jobs:
       - name: Create credentials file from secret
         run: |
            echo '${{ secrets.GCP_CREDENTIALS }}' > gcp-creds.json
+           export GOOGLE_APPLICATION_CREDENTIALS=${{ github.workspace }}/gcp-creds.json
         shell: bash
 
       - name: Terraform Init
         run: terraform init
-        
+        working-directory: terraform
 
       - name: Terraform Plan
         run: |
-          terraform plan -var="credentials_file=${{ github.workspace }}/gcp-creds.json" 
-           
-        
+          terraform plan -var="credentials_file=${{ github.workspace }}/gcp-creds.json"
+        working-directory: terraform
 
       - name: Terraform Apply
         run: |
-          terraform apply -auto-approve \
-            -var="credentials_file=${{ github.workspace }}/gcp-creds.json"             
-        
+          terraform apply -auto-approve -var="credentials_file=${{ github.workspace }}/gcp-creds.json"
+        working-directory: terraform
